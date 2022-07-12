@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <title>  </title>
+    <style>
+        #naslov{
+            justify-content: center;
+            align-items: center;
+        }
+        .row{
+            display: flex;
+            height: 12%;
+            width: 80%;
+            justify-content: space-between;
+        }
+        .polje{
+            width: 10%;
+        }
+        button[dif]{
+            width: 38%;
+        }
+        #ukupno{
+            width: 100%;
+        }
+        .polje, button {
+            text-align: center;
+            font-size: 5vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="full-screen">
+        <div id="naslov" class="header">
+    
+        </div>
+        <div class="content">
+            <div class="row">
+                <input readonly type="text" dif="pts" class="polje">
+                <button dif="btn" onclick="window.location.href = 'slovo_po_slovo.html' "></button>
+                <button dif="btn" onclick="window.location.href = 'moj_broj.html' "></button>
+                <input readonly type="text" dif="pts" class="polje">
+            </div>
+            <div class="row">
+                <input readonly type="text" dif="pts" class="polje">
+                <button dif="btn" onclick="window.location.href = 'desno_lijevo.html'"></button>
+                <button dif="btn" onclick="window.location.href = 'zid.html'"></button>
+                <input readonly type="text" dif="pts" class="polje">
+            </div>
+            <div class="row">
+                <input readonly type="text" dif="pts" class="polje">
+                <button dif="btn" onclick="window.location.href = 'asocijacije.html'"></button>
+                <button dif="btn" onclick="window.location.href = 'spajalica.html'"></button>
+                <input readonly type="text" dif="pts" class="polje">
+            </div>
+            <div class="row">
+                <input readonly type="text" dif="pts" class="polje">
+                <button dif="btn"></button>
+                <button dif="btn"></button>
+                <input readonly type="text" dif="pts" class="polje">
+            </div>
+            <div class="row">
+                <input  readonly type="text" dif="pts" class="polje">
+                <button dif="btn"></button>
+                <button dif="btn"></button>
+                <input  readonly type="text" dif="pts" class="polje">
+            </div>
+            <div class="row">
+                <input readonly type="text" dif="pts" class="polje">
+                <button dif="btn"></button>
+                <button dif="btn"></button>
+                <input readonly type="text" dif="pts" class="polje">
+            </div>
+            <div class="row">
+                <input readonly id="ukupno" type="text" class="polje">
+            </div>
+        </div>
+    </div>
+    <div id="skripte">
+        <script>
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var imena_igara = ["Slovo po Slovo", "Moj Broj", "Desno-Lijevo", "Zid", "Asocijacije", "Spajalica", "Parovi", "Put Oko Svijeta", "Premetaljka", "Ko Zna Zna", "Sef", "Moji Izrazi"]
+            var game_names = ["Letter by Letter", "My Number", "Left Or Right", "The Wall", "Associations", "The Stapler", "Pairs", "World of Flags", "Whirlword", "Who knows?", "The Safe", "My Expressions"]
+            var pts = document.querySelectorAll(".polje[dif=pts]");
+            var btns = document.querySelectorAll("button[dif=btn]");
+            var pts_sum = document.querySelector("#ukupno");
+            pts.forEach((item, index) => {
+                item.value = info[index];
+                pts_sum.value = +pts_sum.value + +item.value;
+            });
+
+            var settings = {};
+
+            if(info[12] == "srpski"){
+                btns.forEach((item, index) => {
+                    item.innerHTML = imena_igara[index];
+                });
+                document.querySelector("#naslov").innerHTML = "Igra Znanja";
+                document.head.querySelector("title").innerHTML = "Igra Znanja";
+            }
+            else if(info[12] == "english"){
+                btns.forEach((item, index) => {
+                    item.innerHTML = game_names[index];
+                });
+                document.querySelector("#naslov").innerHTML = "Game of Knowledges";
+                document.head.querySelector("title").innerHTML = "GOK";
+            }
+        </script>
+    </div>
+</body>
+</html>

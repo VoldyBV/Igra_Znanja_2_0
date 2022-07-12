@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/slovo_po_slovo.css">
+    <title></title>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "../src/serbian_data_library/slovo_po_slovo.js";
+                document.head.querySelector("title").innerHTML = "IZ | Slovo Po Slovo";
+                document.querySelector(".header .header-naslov").innerHTML = "Slovo Po Slovo";
+                document.querySelector("#odgovor").placeholder = "Vaš odgovor...";
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = "../src/english_data_library/letter_by_letter.js";
+                document.head.querySelector("title").innerHTML = "GOK | Letter By Letter";
+                document.querySelector(".header .header-naslov").innerHTML = "Letter By Letter";
+                document.querySelector("#odgovor").placeholder = "Your answer...";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+            Lang_Settings(href);
+        });
+    </script>
+    <script src="../js/slovo_po_slovo.js"></script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="full-screen">
+        <div class="header">
+            <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+            <span class="header-naslov"> Naslov </span>
+            <bv-timer id="timer" value="180" autostart onTimeOut="Game_Lost()"></bv-timer>
+        </div>
+        <div id="menu" class="menu" onclick="Close_Menu()">
+            <div class="menu-content">
+                <button onmousedown="Open_Help()"> Pomoć </button>
+                <button onmousedown="Open_Info()"> Informacije </button>
+                <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+                <button onclick="Quit_The_Game(event, 0)"> Odustani od igre </button>
+            </div>
+            <div class="txt">
+                PAUZIRANO
+            </div>
+        </div>
+        <div class="content">
+            <div id="fraza" class="polje"></div>
+            <div class="buttons">
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+            </div>
+            <div class="buttons">
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+            </div>
+            <div class="buttons">
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+                <button onclick="Search_For_Letter(this)"></button>
+            </div>
+            <div class="odgovor-container">
+                <input oninput="this.value = this.value.toUpperCase();" type="text" id="odgovor" placeholder="Vaš odgovor" class="polje">
+                <button onclick="Check_Answer()" class="accept-btn">&#10004;</button>
+            </div>
+        </div>
+        <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+            <div id="help-srpski" style="display: none;">
+                <h2><u>Opis</u></h2>
+                <i>Slovo Po Slovo</i> je igra u kojoj je cilj pogoditi datu rečenicu. Rečenica može biti
+                neka vrsta fraze, naziv knjige, misao poznate ličnosti ili citat.
+                <br>
+                <br>
+                <h2>Kako se igra?</h2>
+                Igrate igru tako što ćete kliknuti na slova ispred sebe. Na vrhu je rečenica koja
+                je skrivena. Ako je izabrano slovo u rečenici,
+                biće prikazano. Svako slovo samo jednom možete kliknuti.
+                Ako ste shvatili šta se krije, na dnu u polju „Vaš odgovor...“
+                unesite tu rečenicu. Ako ste pogodili, igra se završava, pobjeđujete i dobijate određeni 
+                broj poena.
+                Ako niste tačno pogodili, igra se nastavlja sve dok ne pogodite ispravno, odustanete ili
+                dok Vam vrijeme ne istekne. Imate 3 minuta (180 sekundi) da pronađete rješenje.
+                <br>
+                <br>
+                <h2>Poeni</h2>
+                Svaki put kada nađete rješenje dobijate 10 poena. <br>
+                Zatim za svako skriveno slovo (donja crta) dobijate 1 poen.
+                Zatim za svako neiskorišćeno slovo dobijate 1 poen. <br>
+            </div>
+            <div id="help-english" style="display: none;">
+                <h2><u>Description</u></h2>
+                <i>Letter By Letter</i> is a game where the goal is to guess the given sentence. A sentence can be
+                some kind of phrase, the name of a book, a thought of a famous person or a quote.
+                <br>
+                <br>
+                <h2>How to play?</h2>
+                You play the game by clicking the letters in front of you. At the top is the sentence that 
+                is hidden. If the selected letter is in the sentence, 
+                it will be displayed. You can click every letter only one time. 
+                If you have figured out what is hidden, at the bottom in the field "Your answer..." 
+                enter that sentence. If you guessed, the game ends, you win and get a number of points.
+                If you didn't guess correctly, the game continues until you guess correctly, give up or 
+                until your time runs out. You have 3 minutes (180 seconds) to find the solution.
+                <br>
+                <br>
+                <h2>Points</h2>
+                Each time you find a solution you get 10 points. <br>
+                Then for each covered letter (underscore), you get 1 point.
+                Then for each unused letter you get 1 point. <br>
+            </div>
+        </bv-modal>
+        <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+            <div id="info-srpski" style="font-size: 5vh;">
+                <ul>
+                    <li>Igricu osmislio: Borislav Vučićević</li>
+                    <li>Igricu dizajnirao: Borislav Vučićević</li>
+                    <li>Igricu programirao: Borislav Vučićević</li>
+                    <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+                </ul>
+            </div>        
+            <div id="info-english" style="font-size: 5vh; display: none;">
+                <ul>
+                    <li>Game is made by: Borislav Vučićević</li>
+                    <li>Game's design: Borislav Vučićević</li>
+                    <li>Game is coded: Borislav Vučićević</li>
+                    <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+                </ul>
+            </div>
+        </bv-modal>
+    </div>
+    <div id="skripte">
+    </div>
+</body>
+</html>

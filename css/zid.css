@@ -1,0 +1,62 @@
+.zid {
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    background-size: 100% 100%;
+}
+.zid .row {
+    width: 100%;
+    height: calc(100% / 3);
+    display: flex;
+}
+.zid .row button {
+    width: 25%;
+    height: 100%;
+    font-size: 5vh;
+    justify-content: flex-start;
+}
+#konacno_rjesenje {
+    width: 80%;
+    height: 10%;
+    font-size: 5vh;
+}
+.zid-tacno{
+    cursor: default;
+    opacity: 0;
+}
+.zid-netacno{
+    cursor: not-allowed;
+    color: #3A7CBE;
+}
+.zid-slika-1 {
+    background-image: url(../src/imgs/zid/1.png);
+}
+.zid-slika-2 {
+    background-image: url(../src/imgs/zid/2.png);
+}
+.zid-slika-3 {
+    background-image: url(../src/imgs/zid/3.png);
+}
+.zid-slika-4 {
+    background-image: url(../src/imgs/zid/4.png);
+}
+.zid-slika-5 {
+    background-image: url(../src/imgs/zid/5.png);
+}
+.zid-slika-6 {
+    background-image: url(../src/imgs/zid/6.png);
+}
+.zid-slika-7 {
+    background-image: url(../src/imgs/zid/7.png);
+}
+.zid-slika-8 {
+    background-image: url(../src/imgs/zid/8.png);
+}
+.zid-slika-9 {
+    background-image: url(../src/imgs/zid/9.png);
+}
+.zid-slika-10 {
+    background-image: url(../src/imgs/zid/10.png);
+}

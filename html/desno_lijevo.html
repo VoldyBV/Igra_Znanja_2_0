@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/desno_lijevo.css">
+    <title></title>
+    <script src="../js/desno_lijevo.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "../src/serbian_data_library/desno_lijevo.js";
+                document.head.querySelector("title").innerHTML = "IZ | Desno-Lijevo";
+                document.querySelector(".header .header-naslov").innerHTML = "Desno-Lijevo";
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = "../src/english_data_library/left_or_right.js"
+                document.head.querySelector("title").innerHTML = "GOK | Left Or Right";
+                document.querySelector(".header .header-naslov").innerHTML = "Left Or Right";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+            Lang_Settings(href);
+            Go_FullScreen(info[12]);
+        })
+    </script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="header">
+        <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+        <span class="header-naslov"> Naslov </span>
+        <bv-timer id="timer" value="15" autostart onTimeOut="Time_Out()"></bv-timer>
+    </div>
+    <div id="menu" class="menu" onclick="Close_Menu()">
+        <div class="menu-content">
+            <button onmousedown="Open_Help()"> Pomoć </button>
+            <button onmousedown="Open_Info()"> Informacije </button>
+            <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+            <button onclick="Quit_The_Game(event, 2)"> Odustani od igre </button>
+        </div>
+        <div class="txt">
+            PAUZIRANO
+        </div>
+    </div>
+    <div class="content">
+        <div class="polje" id="naslov">
+
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)"></button>
+            <button onclick="Choose(this)"></button>
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+        </div>
+        <div class="pair-container">
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+            <button onclick="Choose(this)" class="disabled" disabled="disabled"></button>
+        </div>
+    </div>
+    <div id="skripte">
+    </div>
+    
+    <bv-modal title="Pomoć" opened id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="help-srpski" style="display: none;">
+            <h2><u>Opis</u></h2>
+            <i>Desno-Lijevo</i> je igra u kojoj je dato 14 riječi i ime grupe. 7 riječi pripada datoj grupi.
+            Cilji igre jeste da odredite koje to riječi pripadaju datoj grupi.
+            <br>
+            <br>
+            <h2>Kako se igra?</h2>
+            Na vrhu vam se nalazi ime grupe. Riječi su raspoređene u 7 parova. U svakom paru birate riječ
+            za koju mislite da pripada grupi. Za rješavanje jednog para imate 15 sekundi.
+            <br>
+            <br>
+            <h2>Računanje poena</h2>
+            Za svaki tačan odabir, dobijate 4 poena. <br>
+            Za svaki netačan odabir, gubite 2 poena.
+        </div>
+        <div id="help-english" style="display: none;">
+            <h2><u>Description</u></h2>
+            <i>Left Or Right</i> is a game in which 14 words and the name of the group are given. 7 words belong to the given group.
+            The goal of the games is to determine which words belong to the given group.
+            <br>
+            <br>
+            <h2>How to play?</h2>
+            At the top you will find the name of the group. The words are arranged in 7 pairs.
+            In each pair you will choose a word that you think belongs to the group. 
+            You have 15 seconds to solve one pair.
+            <br>
+            <br>
+            <h2>Points</h2>
+            For each correct selection, you get 4 points. <br>
+            For each incorrect selection, you lose 2 points.
+        </div>
+    </bv-modal>
+    <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="info-srpski" style="font-size: 5vh;">
+            <ul>
+                <li>Igricu osmislio: Borislav Vučićević</li>
+                <li>Igricu dizajnirao: Borislav Vučićević</li>
+                <li>Igricu programirao: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+            </ul>
+        </div>        
+        <div id="info-english" style="font-size: 5vh; display: none;">
+            <ul>
+                <li>Game is made by: Borislav Vučićević</li>
+                <li>Game's design: Borislav Vučićević</li>
+                <li>Game is coded: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+            </ul>
+        </div>
+    </bv-modal>
+</body>
+</html>

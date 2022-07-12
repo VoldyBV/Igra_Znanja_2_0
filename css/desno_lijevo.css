@@ -1,0 +1,24 @@
+#naslov {
+    min-height: 10%;
+    width: 90%;
+    font-size: 5vh;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.pair-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 90%;
+    height: 10%;
+    font-size: 5vh;
+}
+.pair-container button {
+    height: 100%;
+    width: 45%;
+    font-size: inherit;
+}

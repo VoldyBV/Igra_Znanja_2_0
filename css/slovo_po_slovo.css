@@ -1,0 +1,34 @@
+#fraza {
+    min-height: 10%;
+    width: 90%;
+    font-size: 5vh;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.odgovor-container{
+    display: flex;
+    justify-content: space-between;
+    min-height: 10%;
+    width: 90%;
+    font-size: 5vh;
+}
+#odgovor {
+    height: 100%;
+    width: 85%;
+    border-radius: 10px;
+    font-size: inherit;
+}
+.buttons{
+    width: 90%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons button, .odgovor-container button {
+    height: 100%;
+    width: 10%;
+    font-size: 5vh;
+}

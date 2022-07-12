@@ -1,0 +1,73 @@
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 15%;
+    width: 95%;
+}
+.row button {
+    height: 100%;
+    width: 24%;
+    font-size: 5vh;
+}
+#final_answer_container button {
+    height: 100%;
+    width: 100%;
+    font-size: 5vh;
+}
+.opened-field[tbl-index] {
+    background-color: #c6eafa;
+    color: #069;
+    font-size: 3.5vh;
+    cursor: default;
+}
+.asocijacije-tacno[tbl-index], .asocijacije-tacno[final-answer-btn]{
+    background-color: rgb(39, 255, 31);
+    border-color: rgb(39, 255, 31);
+    color: white;
+    font-size: 3.5vh;
+    cursor: default;
+    animation: anim-tacno 1s;
+}
+.asocijacije-netacno[tbl-index], .asocijacije-netacno[final-answer-btn]{
+    background-color: rgb(255, 31, 31);
+    border-color: rgb(255, 31, 31);
+    color: white;
+    font-size: 3.5vh;
+    cursor: default;
+    animation: anim-netacno 1s;
+}
+@keyframes anim-tacno{
+    from{
+        background-color: #c6eafa;
+        color: #069;
+        border-color: #069;
+    }
+    to{
+        background-color: rgb(39, 255, 31);
+        border-color: rgb(39, 255, 31);
+        color: white;
+    }
+}
+@keyframes anim-netacno{
+    from{
+        background-color: #c6eafa;
+        color: #069;
+        border-color: #069;
+    }
+    to{
+        background-color: rgb(255, 31, 31);
+        border-color: rgb(255, 31, 31);
+        color: white;
+    }
+}
+div.asocijacije-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}

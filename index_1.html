@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igre Znanja</title>
+    <link rel="icon" type="image/png" href="src/imgs/icon.png" />
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        #naslov{
+            justify-content: center;
+            align-items: center;
+        }
+        button{
+            height: 20%;
+            width: 70%;
+            font-size: 8vh
+        }
+    </style>
+</head>
+<body>
+    <div class="full-screen">
+        <div id="naslov" class="header">
+            Igra Znanja / Game of Knowledges
+        </div>
+        <div class="content">
+            <button onclick="Start('srpski')"> Započni igru </button>
+            <button onclick="Start('english')"> Start the game </button>
+        </div>
+    </div>
+    <div id="scripts">
+        <script>
+            function Start(lng) {
+                var info = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, lng];
+                sessionStorage.setItem("info", JSON.stringify(info));
+                sessionStorage.setItem("sounds_allowed", "true");
+                window.location.href = "html/kontrolna-tabla.html";
+            }
+        </script>
+    </div>
+</body>
+</html>

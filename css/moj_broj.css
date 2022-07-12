@@ -1,0 +1,30 @@
+#dati_broj, #izraz {
+    min-height: 10%;
+    width: 90%;
+    font-size: 5vh;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.button-container {
+    width: 90%;
+    height: 10%;
+    font-size: 5vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.number, .operator, .zagrada {
+    width: 15%;
+    height: 100%;
+    font-size: inherit;
+}
+.decline-btn, #rjesenje, .accept-btn {
+    height: 100%;
+    width: 30%;
+    font-size: inherit;
+    text-align: center;
+}

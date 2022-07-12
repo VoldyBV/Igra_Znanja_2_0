@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/zid.css">
+    <title></title>
+    <script src="../js/zid.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "../src/serbian_data_library/zid.js";
+                document.head.querySelector("title").innerHTML = "IZ | Zid";
+                document.querySelector(".header .header-naslov").innerHTML = "Zid"
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = "../src/english_data_library/the_wall.js"
+                document.head.querySelector("title").innerHTML = "GOK | The Wall";
+                document.querySelector(".header .header-naslov").innerHTML = "The Wall";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+            Lang_Settings(href);
+            Go_FullScreen(info[12])
+        })
+    </script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="header">
+        <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+        <span class="header-naslov"> Naslov </span>
+        <bv-timer id="timer" value="420" autostart onTimeOut="Game_Lost()"></bv-timer>
+    </div>
+    <div id="menu" class="menu" onclick="Close_Menu()">
+        <div class="menu-content">
+            <button onmousedown="Open_Help()"> Pomoć </button>
+            <button onmousedown="Open_Info()"> Informacije </button>
+            <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+            <button onclick="Quit_The_Game(event, 3)"> Odustani od igre </button>
+        </div>
+        <div class="txt">
+            PAUZIRANO
+        </div>
+    </div>
+    <div class="content">
+        <div class="zid" id="zid">
+            <div class="row">
+                <button clicked="no" onclick="Otvori_Ciglu(this)">1</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">2</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">3</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">4</button>
+            </div>
+            <div class="row">
+                <button clicked="no" onclick="Otvori_Ciglu(this)">5</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">6</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">7</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">8</button>
+            </div>
+            <div class="row">
+                <button clicked="no" onclick="Otvori_Ciglu(this)">9</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">10</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">11</button>
+                <button clicked="no" onclick="Otvori_Ciglu(this)">12</button>
+            </div>
+        </div>
+        <button id="konacno_rjesenje" onclick="Konacan_Odgovor()"></button>
+    </div>
+    <div id="skripte">
+    </div>
+    
+    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="help-srpski" style="display: none;">
+            <h2><u>Opis</u></h2>
+            <i>Zid</i> je igra opšteg znanja.
+            Pred vama je zid od sazidan 12 cigli i svaka ima pitanje.
+            Rušite zid ciglu po ciglu odgovarajući na pitanja sa
+            cigli i pokušajte da pogodite šta se krije iza zida.
+            <br>
+            <br>
+            <h2>Kako se igra?</h2>
+            Klikom na ciglu otvara se prozor sa pitanjem i ponuđena 4 odgovora. 
+            Treba da odaberete jedan odgovor i kliknete dugme 'OK'. 
+            Ukoliko ste tačno odgovorili cigla se razbija, a ukoliko niste cigla se blokira. Ukoliko niste sigurni
+            koji odgovor da odaberete kliknite dugme 'Cancel'.<br>
+            Cilj igre je da sa što manje razbijenih i blokiranih cigli pogodite šta se nalazi iza zida. 
+            Klikom na dugme 'KONAČNO RJEŠENJE' otvara se prozor u kojem unosite šta vi mislite da se krije 
+            iza zida. Ukoliko ste pogodili, cijeli zid se ruši i završili ste igru. <br>
+            Ukoliko ste pogriješili, igra se nastavlja. Igru igrate sve dok ne pogodite šta se nalazi iza zida, dok
+            ne odustanete ili dok vam vrijeme ne istekne. Za igranje igre imate 7 minuta (420 sekundi).
+            <br>
+            <br>
+            <h2>Poeni</h2>
+            Ukoliko ste pogodili šta se nalazi iza zida, dobijate 15 poena. <br>
+            Za svaku razbijenu ciglu dobijate 2 poena. <br>
+            Za svaku blokiranu ciglu gubite 1 poen. <br>
+            Za svaku netaknutu ciglu dobijate 3 poena.
+        </div>
+        <div id="help-english" style="display: none;">
+            <h2><u>Description</u></h2>
+            <i>The Wall</i> is a general knowledge game.
+            In front of you is a wall made of 12 bricks and each one has a question.
+            Demolish the wall brick by brick by answering the questions on
+            bricks and try to guess what is behind the wall.
+            <br>
+            <br>
+            <h2>How to play?</h2>
+            Clicking on a brick opens a window with a question and offered 4 answers.
+            Select one of them and click the 'OK' button. If you answered correctly, the brick will break but 
+            if you didn't, the brick will block you from clicking on it. 
+            If you are not sure which answer to choose, click the 'Cancel' button.<br>
+            The goal of the game is to guess what is behind the wall with as few broken and blocked bricks as possible.
+            Clicking on the 'THE FINAL ANSWER' button opens a window in which you enter what you 
+            think is hidden
+            behind the wall. If you guess correctly, the whole wall will collaps and you win. <br>
+            If you made a mistake, the game continues. You play the game until you guess what's
+             behind the wall, until
+            you give up or until your time runs out. You have 7 minutes (420 seconds) to play the game.
+            <br>
+            <br>
+            <h2>Points</h2>
+            If you guessed what is behind the wall, you get 15 points. <br>
+            For each broken brick you get 2 points. <br>
+            For each blocked brick you lose 1 point. <br>
+            You get 3 points for each intact brick.
+        </div>
+    </bv-modal>
+    <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="info-srpski" style="font-size: 5vh;">
+            <ul>
+                <li>Igricu osmislio: Borislav Vučićević</li>
+                <li>Igricu dizajnirao: Borislav Vučićević</li>
+                <li>Igricu programirao: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+            </ul>
+        </div>        
+        <div id="info-english" style="font-size: 5vh; display: none;">
+            <ul>
+                <li>Game is made by: Borislav Vučićević</li>
+                <li>Game's design: Borislav Vučićević</li>
+                <li>Game is coded: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+            </ul>
+        </div>
+    </bv-modal>
+</body>
+</html>

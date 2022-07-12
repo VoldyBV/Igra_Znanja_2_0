@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/spajalica.css">
+    <title></title>
+    <script src="../js/spajalica.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "../src/serbian_data_library/spajalica.js";
+                document.head.querySelector("title").innerHTML = "IZ | Spajalica";
+                document.querySelector(".header .header-naslov").innerHTML = "Spajalica"
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = ""
+                document.head.querySelector("title").innerHTML = "GOK | The Stapler";
+                document.querySelector(".header .header-naslov").innerHTML = "The Stapler";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+            Lang_Settings(href)
+        })
+    </script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="header">
+        <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+        <span class="header-naslov"> Naslov </span>
+        <bv-timer id="timer" value="30" autostart></bv-timer>
+    </div>
+    <div id="menu" class="menu" onclick="Close_Menu()">
+        <div class="menu-content">
+            <button onmousedown="Open_Help()"> Pomoć </button>
+            <button onmousedown="Open_Info()"> Informacije </button>
+            <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+            <button onclick="Quit_The_Game(event, 5)"> Odustani od igre </button>
+        </div>
+        <div class="txt">
+            PAUZIRANO
+        </div>
+    </div>
+    <div class="content">
+        <div id="naslov" class="polje"></div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+        <div class="pair-container">
+            <button pair="left"></button>
+            <button pair="right"></button>
+        </div>
+    </div>
+    <div id="skripte">
+    </div>
+    
+    <bv-modal title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="help-srpski" style="display: none;">
+            <h2><u>Opis</u></h2>
+            <i>Ime igre</i>
+            <br>
+            <br>
+            <h2>Kako se igra?</h2>
+            <br>
+            <br>
+            <h2>Računanje poena</h2>
+        </div>
+        <div id="help-english" style="display: none;">
+            <h2><u>Description</u></h2>
+            <i>Game name</i>
+            <br>
+            <br>
+            <h2>How to play?</h2>
+            <br>
+            <br>
+            <h2>Points</h2>
+        </div>
+    </bv-modal>
+    <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="info-srpski" style="font-size: 5vh;">
+            <ul>
+                <li>Igricu osmislio: Borislav Vučićević</li>
+                <li>Igricu dizajnirao: Borislav Vučićević</li>
+                <li>Igricu programirao: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+            </ul>
+        </div>        
+        <div id="info-english" style="font-size: 5vh; display: none;">
+            <ul>
+                <li>Game is made by: Borislav Vučićević</li>
+                <li>Game's design: Borislav Vučićević</li>
+                <li>Game is coded: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+            </ul>
+        </div>
+    </bv-modal>
+</body>
+</html>

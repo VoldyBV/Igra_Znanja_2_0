@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/asocijacije.css">
+    <title></title>
+    <script src="../js/asocijacije.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "../src/serbian_data_library/asocijacije.js";
+                document.head.querySelector("title").innerHTML = "IZ | Asocijacije";
+                document.querySelector(".header .header-naslov").innerHTML = "Asocijacije"
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = "../src/english_data_library/associations.js"
+                document.head.querySelector("title").innerHTML = "GOK | Associations";
+                document.querySelector(".header .header-naslov").innerHTML = "Associations";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+            Lang_Settings(href);
+            Go_FullScreen(info[12]);
+        })
+    </script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="header">
+        <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+        <span class="header-naslov"> Naslov </span>
+        <bv-timer id="timer" value="180" autostart onTimeOut="Game_Lost()"></bv-timer>
+    </div>
+    <div id="menu" class="menu" onclick="Close_Menu()">
+        <div class="menu-content">
+            <button onmousedown="Open_Help()"> Pomoć </button>
+            <button onmousedown="Open_Info()"> Informacije </button>
+            <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+            <button onclick="Quit_The_Game(event, 4)"> Odustani od igre </button>
+        </div>
+        <div class="txt">
+            PAUZIRANO
+        </div>
+    </div>
+    <div class="content">
+        <div class="row">
+            <button col="A" tbl-index="A-0" onclick="Open_Field(this)">A1</button>
+            <button col="B" tbl-index="B-0" onclick="Open_Field(this)">B1</button>
+            <button col="C" tbl-index="C-0" onclick="Open_Field(this)">C1</button>
+            <button col="D" tbl-index="D-0" onclick="Open_Field(this)">D1</button>
+        </div>
+        <div class="row">
+            <button col="A" tbl-index="A-1" onclick="Open_Field(this)">A2</button>
+            <button col="B" tbl-index="B-1" onclick="Open_Field(this)">B2</button>
+            <button col="C" tbl-index="C-1" onclick="Open_Field(this)">C2</button>
+            <button col="D" tbl-index="D-1" onclick="Open_Field(this)">D2</button>
+        </div>
+        <div class="row">
+            <button col="A" tbl-index="A-2" onclick="Open_Field(this)">A3</button>
+            <button col="B" tbl-index="B-2" onclick="Open_Field(this)">B3</button>
+            <button col="C" tbl-index="C-2" onclick="Open_Field(this)">C3</button>
+            <button col="D" tbl-index="D-2" onclick="Open_Field(this)">D3</button>
+        </div>
+        <div class="row">
+            <button col="A" tbl-index="A-3" onclick="Open_Field(this)">A4</button>
+            <button col="B" tbl-index="B-3" onclick="Open_Field(this)">B4</button>
+            <button col="C" tbl-index="C-3" onclick="Open_Field(this)">C4</button>
+            <button col="D" tbl-index="D-3" onclick="Open_Field(this)">D4</button>
+        </div>
+        <div class="row">
+            <button col="A" tbl-index="A-4" onclick="Daj_Rjesenje_Kolone(this)">A</button>
+            <button col="B" tbl-index="B-4" onclick="Daj_Rjesenje_Kolone(this)">B</button>
+            <button col="C" tbl-index="C-4" onclick="Daj_Rjesenje_Kolone(this)">C</button>
+            <button col="D" tbl-index="D-4" onclick="Daj_Rjesenje_Kolone(this)">D</button>
+        </div>
+        <div class="row" id="final_answer_container">
+            <button final-answer-btn onclick="Daj_Rjesenje_Asocijacije()"></button>
+        </div>
+    </div>
+    <div id="skripte">
+    </div>
+    
+    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="help-srpski" style="display: none;">
+            <h2><u>Opis</u></h2>
+            <i>Asocijacije</i> je igra s riječima. Prvo treba riješiti četiri sporedne asocijacije, 
+            a zatim pomoću 4 dobijene riječi riješiti glavnu asocijaciju. Rješenje svake asocijacije je neka 
+            riječ na koju asociraju četiri riječi u njenoj koloni. 
+            Na početku su sve riječi su skrivenene, i igrač ih otkriva jedanu po jedanu. 
+            Za igranje imate 3 minute (180 sekundi).
+            <br>
+            <br>
+            <h2>Kako se igra?</h2>
+            Polja otvarate lijevim klikom. Kada kliknete neko polje u njega će se upisati određena riječ. 
+            Kao rješenje kolone vi unosite riječ na koju vas asociraju rijči iz te kolone. 
+            Za konačno rješenje unosite riječ na koju vas asociraju rješenja kolona.
+            <br>
+            <br>
+            <h2>Poeni</h2>
+            Kada riješite sporednu asocijaciju, dobijate 5 poena i bonus 1 
+            poen za svako neotkriveno polje u toj asocijaciji. <br>
+            Kada riješite glavnu asocijaciju, dobijate 15 poena, 6 poena bonusa za svaku nerješenu sporednu 
+            asocijaciju i 1 poen bonusa za svako neotkriveno polje. 
+        </div>
+        <div id="help-english" style="display: none;">
+            <h2><u>Description</u></h2>
+            <i>Associations</i> is a word game. First you need to solve the four secondary associations, 
+            and then solve the main association using the 4 obtained words. The solution of each association 
+            is a word to which four words in its column associate. At the beginning, all the words are hidden, 
+            and the player reveals them one by one. You have 3 minutes (180 seconds) to play.
+            <br>
+            <br>
+            <h2>How to play?</h2>
+            You open the fields with a left click. When you click on a field, a certain word will be written 
+            in it. As an answer of a column, you enter a word to which words from that column associate you.
+            For the final answer, enter the word that answers of columns associate you with.
+            <br>
+            <br>
+            <h2>Points</h2>
+            When you solve a secondary association, you get 5 points and a bonus of 1
+            point for each covered field in that association. <br>
+            When you solve the main association, you get 15 points, 6 bonus points for each unsolved secondary
+            association and 1 bonus point for each covered field.
+        </div>
+    </bv-modal>
+    <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="info-srpski" style="font-size: 5vh;">
+            <ul>
+                <li>Igricu osmislio: Borislav Vučićević</li>
+                <li>Igricu dizajnirao: Borislav Vučićević</li>
+                <li>Igricu programirao: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+            </ul>
+        </div>        
+        <div id="info-english" style="font-size: 5vh; display: none;">
+            <ul>
+                <li>Game is made by: Borislav Vučićević</li>
+                <li>Game's design: Borislav Vučićević</li>
+                <li>Game is coded: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+            </ul>
+        </div>
+    </bv-modal>
+</body>
+</html>

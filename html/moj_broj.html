@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/moj_broj.css">
+    <title></title>
+    <script src="../js/moj_broj.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "";
+                document.head.querySelector("title").innerHTML = "IZ | Moj Broj";
+                document.querySelector(".header .header-naslov").innerHTML = "Moj Broj";
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = ""
+                document.head.querySelector("title").innerHTML = "GOK | My Number";
+                document.querySelector(".header .header-naslov").innerHTML = "My Number";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+            Lang_Settings(href);
+            Start();
+            Go_FullScreen(info[12]);
+        })
+    </script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="header">
+        <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+        <span class="header-naslov"> Naslov </span>
+        <bv-timer id="timer" value="180" autostart onTimeOut="Submit_Answer()"></bv-timer>
+    </div>
+    <div id="menu" class="menu" onclick="Close_Menu()">
+        <div class="menu-content">
+            <button onmousedown="Open_Help()"> Pomoć </button>
+            <button onmousedown="Open_Info()"> Informacije </button>
+            <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+            <button onclick="Quit_The_Game(event, 1)"> Odustani od igre </button>
+        </div>
+        <div class="txt">
+            PAUZIRANO
+        </div>
+    </div>
+    <div class="content">
+        <div id="dati_broj" class="polje">???</div>
+        <div id="izraz" class="polje"></div>
+        <div class="button-container">
+            <button class="number" onclick="Broj(this)"></button>
+            <button class="number" onclick="Broj(this)"></button>
+            <button class="number" onclick="Broj(this)"></button>
+            <button class="number" onclick="Broj(this)"></button>
+            <button class="number" onclick="Broj(this)"></button>
+            <button class="number" onclick="Broj(this)"></button>
+        </div>
+        <div class="button-container">
+            <button class="operator" onclick="Operator(this)">+</button>
+            <button class="operator" onclick="Operator(this)">-</button>
+            <button class="operator" onclick="Operator(this)">*</button>
+            <button class="operator" onclick="Operator(this)">/</button>
+            <button class="zagrada" onclick="Zagrada(this)">(</button>
+            <button class="zagrada" onclick="Zagrada(this)">)</button>
+        </div>
+        <div class="button-container">
+            <button class="decline-btn" onclick="Remove()">&#10006;</button>
+            <input type="text" class="polje" id="rjesenje" value="?" readonly />
+            <button class="accept-btn" onclick="Submit_Answer()">&#10004;</button>
+        </div>
+    </div>
+    <div id="skripte">
+    </div>
+    
+    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="help-srpski" style="display: none;">
+            <h2><u>Opis</u></h2>
+            <i>Moj Broj</i> je igra u kojoj je cilj naći što približniji broj zadatom broju.
+             Zadati broj moze biti između 0 i 1000
+            <br>
+            <br>
+            <h2>Kako se igra?</h2>
+            Igra se igra tako što klikćete od datih brojeva i osnovnih operacija pravite izraz,
+            čije bi rješenje trebalo biti što približnije zadatom broju.
+            <br>
+            Klikom na zeleno dugme, potvrđujete Vaše rješenje i igra se završava.
+            <br>
+            <br>
+            <h3>Računanje poena</h3>
+            <ul>
+                <li>ukoliko se Vaš broj jednak zadatom broju, osvajate 40 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 1, osvajate 36 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 2, osvajate 32 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 3, osvajate 28 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 4, osvajate 24 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 5, osvajate 20 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 6, osvajate 16 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 7, osvajate 12 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 8, osvajate 8 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja jednaka 9, osvajate 4 poena;</li>
+                <li>ukoliko je razlika Vašeg i zadatog broja veća od 9, osvajate 0 poena;</li>
+            </ul>
+        </div>
+        <div id="help-english" style="display: none;"><h2><u>Description</u></h2>
+            <i>My Number</i> is a game in which the goal is to find a number as close as possible to the given number.
+             The given number can be between 0 and 1000
+            <br>
+            <br>
+            <h2>How to play?</h2>
+            The game is played by clicking on given numbers and basic operations to create an expression, 
+            the result of which should be the number closest to the given number.
+            <br>
+            Click the green button to  confirm your result and the game ends.
+            <br>
+            <br>
+            <h2>Points</h2>
+            <ul>
+                <li>if your number is equal to the given number, you earn 40 points;</li>
+                <li>if the difference between your number and the given number is equal to 1, you earn 36 points;</li>
+                <li>if the difference between your number and the given number is equal to 2, you earn 32 points;</li>
+                <li>if the difference between your number and the given number is equal to 3, you earn 28 points;</li>
+                <li>if the difference between your number and the given number is equal to 4, you earn 24 points;</li>
+                <li>if the difference between your number and the given number is equal to 5, you earn 20 points;</li>
+                <li>if the difference between your number and the given number is equal to 6, you earn 16 points;</li>
+                <li>if the difference between your number and the given number is equal to 7, you earn 12 points;</li>
+                <li>if the difference between your number and the given number is equal to 8, you earn 8 points;</li>
+                <li>if the difference between your number and the given number is equal to 9, you earn 4 points;</li>
+                <li>if the difference between your number and the given number is greater than 9, you earn 0 points;</li>
+            </ul>
+        </div>
+    </bv-modal>
+    <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="info-srpski" style="font-size: 5vh;">
+            <ul>
+                <li>Igricu osmislio: Borislav Vučićević</li>
+                <li>Igricu dizajnirao: Borislav Vučićević</li>
+                <li>Igricu programirao: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+            </ul>
+        </div>        
+        <div id="info-english" style="font-size: 5vh; display: none;">
+            <ul>
+                <li>Game is made by: Borislav Vučićević</li>
+                <li>Game's design: Borislav Vučićević</li>
+                <li>Game is coded: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+            </ul>
+        </div>
+    </bv-modal>
+</body>
+</html>

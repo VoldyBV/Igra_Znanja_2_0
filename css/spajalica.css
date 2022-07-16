@@ -23,3 +23,50 @@
     width: 45%;
     font-size: inherit;
 }
+.selected{
+    background-color: rgb(255, 214, 31);
+    border-color: rgb(255, 214, 31);
+    animation: selecting 0.5s;
+}
+.spajalica-tacno {
+    background-color: rgb(39, 255, 31);
+    border-color: rgb(39, 255, 31);
+    animation: spajalica-tacno-anim 0.5s;
+    cursor: default;
+}
+.spajalica-netacno {
+    background-color: rgb(255, 31, 31);
+    border-color: rgb(255, 31, 31);
+    animation: spajalica-netacno-anim 0.5s;
+    cursor: default;
+}
+@keyframes selecting {
+    from {
+        background-color: #069;
+        border-color: #069;
+    }
+    to {
+        background-color: rgb(255, 214, 31);
+        border-color: rgb(255, 214, 31);
+    }
+}
+@keyframes spajalica-tacno-anim {
+    from {
+        background-color: #069;
+        border-color: #069;
+    }
+    to {
+        background-color: rgb(39, 255, 31);
+        border-color: rgb(39, 255, 31);
+    }
+}
+@keyframes spajalica-netacno-anim {
+    from {
+        background-color: #069;
+        border-color: #069;
+    }
+    to {
+        background-color: rgb(255, 31, 31);
+        border-color: rgb(255, 31, 31);
+    }
+}

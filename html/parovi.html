@@ -13,26 +13,27 @@
     <!-- Styles -->
     <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/spajalica.css">
+    <link rel="stylesheet" href="../css/parovi.css">
     <title></title>
-    <script src="../js/spajalica.js"></script>
+    <script src="../js/parovi.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             var info = JSON.parse(sessionStorage.getItem("info"));
             var href = "";
             if(info[12] == "srpski"){
-                href = "../src/serbian_data_library/spajalica.js";
-                document.head.querySelector("title").innerHTML = "IZ | Spajalica";
-                document.querySelector(".header .header-naslov").innerHTML = "Spajalica"
+                href = "";
+                document.head.querySelector("title").innerHTML = "IZ | Parovi";
+                document.querySelector(".header .header-naslov").innerHTML = "Parovi"
                 document.querySelector("#help #help-srpski").style.display = "block";
             }
             else if(info[12] == "english"){
-                href = "../src/english_data_library/the_stapler.js"
-                document.head.querySelector("title").innerHTML = "GOK | The Stapler";
-                document.querySelector(".header .header-naslov").innerHTML = "The Stapler";
+                href = ""
+                document.head.querySelector("title").innerHTML = "GOK | Pairs";
+                document.querySelector(".header .header-naslov").innerHTML = "Pairs";
                 document.querySelector("#help #help-english").style.display = "block";
             }
-            Lang_Settings(href)
+            Lang_Settings(href);
+            Start();
         })
     </script>
 </head>
@@ -52,90 +53,86 @@
     <div class="header">
         <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
         <span class="header-naslov"> Naslov </span>
-        <bv-timer id="timer" value="90" autostart></bv-timer>
+        <bv-timer id="timer" value="36"></bv-timer>
     </div>
-    <div id="menu" class="menu" onclick="Close_Menu()">
+    <div id="menu" class="menu" onclick="Close_Menu(); document.querySelector('#timer').pause()">
         <div class="menu-content">
             <button onmousedown="Open_Help()"> Pomoć </button>
             <button onmousedown="Open_Info()"> Informacije </button>
             <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
-            <button onclick="Quit_The_Game(event, 5)"> Odustani od igre </button>
+            <button onclick="Quit_The_Game(event, 6)"> Odustani od igre </button>
         </div>
         <div class="txt">
             PAUZIRANO
         </div>
     </div>
     <div class="content">
-        <div id="naslov" class="polje"></div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
+        <div class="row">
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
         </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
+        <div class="row">
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
         </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
+        <div class="row">
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
         </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
-        </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
-        </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
-        </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
-        </div>
-        <div class="pair-container">
-            <button pair="left" onclick="Select(this)"></button>
-            <button pair="right" onclick="Check(this)"></button>
+        <div class="row">
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
+            <button onclick="Open(this)"></button>
         </div>
     </div>
     <div id="skripte">
     </div>
     
-    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+    <bv-modal opened title="Pomoć" id="help">
         <div id="help-srpski" style="display: none;">
             <h2><u>Opis</u></h2>
-            <i>Spajalica</i> je igra s riječima. U njoj trebate da "spojite" lijevu i desnu stranu tabele. 
-            Svaka riječ iz lijeve kolone ima svoj par u desnoj koloni. Za igranje imate 1.5 minuta 
-            (90 sekundi).
+            <i>Parovi</i> je igra memorije. Cilj je pronaći svih 12 parova u 36 poteza.
             <br>
             <br>
             <h2>Kako se igra?</h2>
-            Prvo kliknete riječ u lijevoj koloni tabele. Potom kliknete na riječ u desnoj koloni kako biste ih
-            "spojili" i napravili par. Ukoliko ste "spojili" ispravan par, odabrane riječi će pozeleniti.
-            Ukoliko niste "spojili" ispravan par, tada će riječ u lijevoj koloni pocrveniti.
+            Lijevim klikom otkrivate sličice. Ukoliko ste pronašli par sličica, sličice ostaju otkrivene. 
+            Ukoliko niste pronašli par sličica, sličice se skrivaju. Svaki put kad otvorite 2 sličice izgubite
+            1 potez.
             <br>
             <br>
-            <h2>Računanje poena</h2>
-            Za svaki ispravan par dobijate 4 poena.
+            <h2>Poeni</h2>
+            Za svaki pronađen par sličica dobijate 2 poena. <br>
+            Na kraju igre za svaki preostali potez dobijate 1 poen.
         </div>
         <div id="help-english" style="display: none;">
             <h2><u>Description</u></h2>
-            <i>The Stapler</i> is a word game. You need "to staple" the left and right sides of the table.
-            Each word from the left column has its match in the right column. You have 1.5 minutes to play
-            (90 seconds).
+            <i>Pairs</i> is a memory game. The goal is to find all 12 pairs in 36 moves.
             <br>
             <br>
             <h2>How to play?</h2>
-            First, you click on the word in the left column of the table. 
-            Then you click on the word in the right column "to staple" and make a pair.
-            If you "stapled" the correct pair, the selected words will turn green.
-            If you did not "stapled" the correct pair, then the word in the left column will turn red.
+            Left click on any button to reveal pictures. If you found a pair of pictures, the pictures 
+            remain reaveled. If you have not found a pair of pictures, the pictures will become hidden. 
+            Every time you reveal 2 pictures you lose 1 move.
             <br>
             <br>
             <h2>Points</h2>
-            For each correct pair you get 4 points.
+            You get 2 points for each found pair of pictures. <br>
+            At the end of the game, you get 1 point for each remaining move.
         </div>
     </bv-modal>
     <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">

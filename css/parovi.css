@@ -1,0 +1,66 @@
+.row{
+    width: 90%;
+    height: 20%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.row button{
+    height: calc(90vh * 0.20);
+    width: calc(90vh * 0.20);
+    background-size: 100% 100%;
+    margin-left: 1.8vh;
+    margin-right: 1.8vh;
+}
+.background_srpski{
+    background-image: url(../src/imgs/parovi/background_srpski.png);
+}
+.background_english{
+    background-image: url(../src/imgs/parovi/background_english.png);
+}
+.blob{
+    background-image: url(../src/imgs/parovi/blob.png);
+}
+.bulb{
+    background-image: url(../src/imgs/parovi/bulb.png);
+}
+.checkmark{
+    background-image: url(../src/imgs/parovi/checkmark.png);
+}
+.clover{
+    background-image: url(../src/imgs/parovi/clover.png);
+}
+.exlamation_mark{
+    background-image: url(../src/imgs/parovi/exlamation_mark.png);
+}
+.heart{
+    background-image: url(../src/imgs/parovi/heart.png);
+}
+.leaf{
+    background-image: url(../src/imgs/parovi/leaf.png);
+}
+.lightning{
+    background-image: url(../src/imgs/parovi/lightning.png);
+}
+.question_mark{
+    background-image: url(../src/imgs/parovi/question_mark.png);
+}
+.romb{
+    background-image: url(../src/imgs/parovi/romb.png);
+}
+.royal{
+    background-image: url(../src/imgs/parovi/royal.png);
+}
+.star{
+    background-image: url(../src/imgs/parovi/star.png);
+}
+div.parovi-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}

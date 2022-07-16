@@ -166,7 +166,7 @@ function Activate_End_Dialog(won_or_lost){
         else if(info[12] == "english") settings.title = "You won";
     }
     else{
-        if(info[12] == "srpski") settings.title = "Igubili ste";
+        if(info[12] == "srpski") settings.title = "Izgubili ste";
         else if(info[12] == "english") settings.title = "You lost";
     }
 

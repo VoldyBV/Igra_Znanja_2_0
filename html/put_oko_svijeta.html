@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Application parts -->
-    <script src="https://combinatronics.com/VoldyBV/callback_dialogs/master/dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/bv-dialog/master/bv_dialog.js"></script>
     <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
     <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
     <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
@@ -27,7 +27,7 @@
                 document.querySelector("#help #help-srpski").style.display = "block";
             }
             else if(info[12] == "english"){
-                href = ""
+                href = "../src/english_data_library/world_of_flags.js"
                 document.head.querySelector("title").innerHTML = "GOK | World of Flags";
                 document.querySelector(".header .header-naslov").innerHTML = "World of Flags";
                 document.querySelector("#help #help-english").style.display = "block";
@@ -71,33 +71,47 @@
         </div>
         <input type="text" id="odgovor" class="polje" oninput="this.value = this.value.toUpperCase()"/>
         <div class="button-container">
-            <button class="accept-btn" onclick="Check_Flag()">&#10004;</button>
             <button class="next-flag-btn" onclick="Next()"></button>
+            <button class="accept-btn" onclick="Check_Flag()">&#10004;</button>
         </div>
     </div>
     <div id="skripte">
     </div>
     
-    <bv-modal title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
         <div id="help-srpski" style="display: none;">
             <h2><u>Opis</u></h2>
-            <i>Ime igre</i>
+            <i>Put oko svijeta</i> je igra u kojoj na osnovu date zastave pogađate ime države. 
+            Za igranje imate 2.5 minuta (150 sekundi).
             <br>
             <br>
             <h2>Kako se igra?</h2>
+            U polje "Vaš odgovor..." unesite ime države kojoj pripada data zastava, potom kliknite zeleno dugme 
+            kako biste potvrdili Vaš odgovor. Ukoliko je Vaš odgovor tačan, dobijate 10 poena, u suprotnom 
+            gubite 5 poena. <br>
+            Ukoliko niste sigurni o kojoj je državi riječ, kliknite dugme "Sledeća zastava". 
             <br>
             <br>
-            <h2>Računanje poena</h2>
+            <h2>Poeni</h2>
+            Za svaki tačan odgovor dobijate 10 poena<br>
+            Za svaki netačan odgovor gubite 5 poena.
         </div>
         <div id="help-english" style="display: none;">
             <h2><u>Description</u></h2>
-            <i>Game name</i>
+            <i>World of Flags</i> is a game in which you guess the name of the country based on a given flag.
+            You have 2.5 minutes (150 seconds) to play.
             <br>
             <br>
-            <h2>How to play?</h2>
+            <h2>How to play?</h2> In the "Your answer..." field, 
+            enter the name of the country to which the given flag belongs, then click the green button
+            to confirm your answer. If your answer is correct, you get 10 points, otherwise
+            you lose 5 points. <br>
+            If you are not sure which country it is, click the "Next flag" button.
             <br>
             <br>
             <h2>Points</h2>
+            For each correct answer you get 10 points<br>
+            For each incorrect answer you lose 5 points.
         </div>
     </bv-modal>
     <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">

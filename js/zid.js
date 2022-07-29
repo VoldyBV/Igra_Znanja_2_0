@@ -15,18 +15,18 @@ function Start() {
 }
 function Otvori_Ciglu(elem){
     CIGLA = elem;
-    var settings = {};
+    var settings = new DialogSettings("singleOption");
     var opts = Mix_Up_Array(GAME.answers[+CIGLA.getAttribute("game-index")]);
 
     settings.title = GAME.questions[+CIGLA.getAttribute("game-index")];
     settings.options = [{}, {}, {}, {}]
 
     for(var i = 0;i < 4;i++){
-        settings.options[i].displayValue = settings.options[i].realValue = opts[i];
+        settings.options[i].display_value = settings.options[i].real_value = opts[i];
     }
 
     settings.on_OK = (odgovor) => {
-        Provjeri_Odgovor(odgovor.realValue);
+        Provjeri_Odgovor(odgovor.real_value);
     }
     BV_dialog.singleOption(settings);
 }
@@ -56,17 +56,20 @@ function Provjeri_Odgovor(odgovor) {
     }
 }
 function Konacan_Odgovor(){
-    var settings = {};
+    var settings = new DialogSettings("prompt");
     var info = JSON.parse(sessionStorage.getItem("info"));
 
     if(info[12] == "srpski"){
-        settings.title = "Unesite konačan odgovor";
+        settings.title = "Konačan odgovor"
+        settings.message = "Unesite konačan odgovor";
     }
     else if(info[12] == "english") {
-        settings.title = "Enter your final answer";
+        settings.title = "Final answer"
+        settings.message = "Enter your final answer";
     }
 
     settings.type = "text";
+    settings.upper_lower = "lower";
     settings.on_OK = (odgovor) => {
         Provjeri_Konacan_Odgovor(odgovor);
     }
@@ -90,7 +93,7 @@ function Game_Won(){
     var positive_points = document.querySelectorAll(".zid .zid-tacno").length * 2;
     var negative_points = document.querySelectorAll(".zid .zid-netacno").length * -1;
     var bonus = document.querySelectorAll(".zid [clicked=no]").length * 3;
-    var settings = {};
+    var settings = new DialogSettings("alert");
     var info = JSON.parse(sessionStorage.getItem("info"));
 
     btns.forEach((item) => {
@@ -104,7 +107,7 @@ function Game_Won(){
             Bonus na srušene cigle: ${positive_points}<br>
             Antibonus na blokirane cigle: ${negative_points}<br>
             Bonus na netaknute cigle: ${bonus}<br>
-            <hr><br>
+            <hr>
             UKUPNO: ${points + positive_points + negative_points + bonus}
         `;
     }
@@ -115,7 +118,7 @@ function Game_Won(){
             Bonus for broken bricks: ${positive_points}<br>
             Antibonus for blocked briks: ${negative_points}<br>
             Bonus for untouched bricks: ${bonus}<br>
-            <hr><br>
+            <hr>
             TOTAL: ${points + positive_points + negative_points + bonus}
         `;
     }
@@ -147,7 +150,7 @@ function Game_Lost() {
             Konacno rjesenje je: ${GAME.final_answer}<br>
             Bonus na srušene cigle: ${positive_points}<br>
             Antibonus na blokirane cigle: ${negative_points}<br>
-            <hr><br>
+            <hr>
             UKUPNO: ${positive_points + negative_points}
         `;
     }
@@ -157,7 +160,7 @@ function Game_Lost() {
             Filan answer is: ${GAME.final_answer}<br>
             Bonus for broken bricks: ${positive_points}<br>
             Antibonus for blocked briks: ${negative_points}<br>
-            <hr><br>
+            <hr>
             TOTAL: ${positive_points + negative_points}
         `;
     }

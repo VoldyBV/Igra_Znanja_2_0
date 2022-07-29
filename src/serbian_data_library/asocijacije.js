@@ -7,6 +7,13 @@ function Get_A_Game(game_index){
             "D": ["DRVO", "ŠUMA", "FLAUTA", "AZIJA", "BAMBUS"],
             "final_answer": "PANDA"
         };
+        case 2: return {
+            "A": ["CRNA", "BIJELA", "VUDU", "ČAROLIJE", "MAGIJA"],
+            "B": ["LJUBAV", "OTROV", "BOČICA", "ELIKSIR", "NAPITAK"],
+            "C": ["ŠTAP", "ČISTITI", "LOPATICA", "LETEĆA", "METLA"],
+            "D": ["ŽRTVA", "PROCES", "PRIZIVANJE", "SVIJEĆA", "RITUAL"],
+            "final_answer": "VJEŠTICA"
+        };
         default: break;
     }
 }

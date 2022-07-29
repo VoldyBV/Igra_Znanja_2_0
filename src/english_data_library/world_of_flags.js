@@ -70,3 +70,10 @@ function Get_A_Flag(flad_id){
         default: return "";
     }
 }
+(
+    () => {
+        document.querySelector("#odgovor").placeholder = "Your answer...";
+        document.querySelector("button.next-flag-btn").innerHTML = "Next flag";
+        Start();
+    }
+)();

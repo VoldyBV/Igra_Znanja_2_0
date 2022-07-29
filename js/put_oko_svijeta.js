@@ -24,7 +24,7 @@ function Sledeća_Zastava(){
 }
 function Check_Flag(){
     var flag_name = document.querySelector("#odgovor").value;
-    var settings = {};
+    var settings = new DialogSettings("alert");
     var info = JSON.parse(sessionStorage.getItem("info"));
 
     if(GAME.flag_names.includes(flag_name)) {
@@ -66,7 +66,7 @@ function Check_Flag(){
     BV_dialog.alert(settings);
 }
 function Next() {
-    var settings = {};
+    var settings = new DialogSettings("alert");
     var info = JSON.parse(sessionStorage.getItem("info"));
         
     if(info[12] == "srpski"){
@@ -84,7 +84,7 @@ function Next() {
     BV_dialog.alert(settings);
 }
 function End(){
-    var settings = {};
+    var settings = new DialogSettings("alert");
     var info = JSON.parse(sessionStorage.getItem("info"));
 
     if(POSITIVE_POINTS - NEGATIVE_POINTS > 0){

@@ -1,6 +1,6 @@
 #zastava {
     width: 80%;
-    height: 70%;
+    height: 65%;
     background-color: #fff;
 }
 #zastava img {
@@ -8,12 +8,15 @@
     width: 100%;
 }
 #odgovor, div.button-container{
-    height: 10%;
     width: 80%;
     font-size: 5vh;
     border-radius: 10px;
 }
+#odgovor {
+    height: 15%;
+}
 div.button-container {
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;

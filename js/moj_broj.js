@@ -51,17 +51,18 @@ function Remove(){
             item.classList.toggle("disabled");
         }
     });
-    if(removed != "(" && removed != ")"){
+    if(removed != "(" && removed != ")" && removed != undefined){
         NUMBER_OR_OPERATOR = !NUMBER_OR_OPERATOR;
     }
 }
 function Submit_Answer(){
+    document.querySelector("#timer").pause();
     var result = +document.querySelector("#rjesenje").value;
     var given_number = +document.querySelector("#dati_broj").innerHTML;
     var info = JSON.parse(sessionStorage.getItem("info"));
     var razlika;
     var pts;
-    var settings = {};
+    var settings = new DialogSettings("alert");
 
     if(result == "?") pts = 0;
     else {

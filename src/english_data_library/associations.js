@@ -7,6 +7,13 @@ function Get_A_Game(game_index){
             "D": ["WOOD", "FOREST", "FLUTE", "ASIA", "BAMBOO"],
             "final_answer": "PANDA"
         };
+        case 2: return {
+            "A": ["BLACK", "WHITE", "VOODOO", "SPELLS", "MAGIC"],
+            "B": ["LOVE", "POISON", "BOTTLE", "ELIXIR", "POTION"],
+            "C": ["STICK", "SWEEPING", "DUSTPAN", "FLYING", "BROOM"],
+            "D": ["SACRAFICE", "PROCESS", "SUMMONING", "CANDLE", "RITUAL"],
+            "final_answer": "WITCH"
+        };
         default: break;
     }
 }

@@ -11,7 +11,7 @@ var final_pts = 0;
 var END_DIALOG_PARAM = "";
 
 function Start() {
-    GAME = Get_A_Game(Get_Random_Number(1));
+    GAME = Get_A_Game(Get_Random_Number(2));
 }
 function Open_Field(elem){
     var col = elem.getAttribute("tbl-index").split('-')[0];
@@ -25,13 +25,15 @@ function Open_Field(elem){
 function Daj_Rjesenje_Kolone(elem){
     COL_RES = elem.getAttribute("tbl-index").split('-')[0];
     var info = JSON.parse(sessionStorage.getItem("info"));
-    var settings = {};
+    var settings = new DialogSettings("prompt");
 
     if(info[12] == "srpski"){
-        settings.title = `Unesite rješenje kolone ${COL_RES}:`;
+        settings.title = "Rješenje kolone"
+        settings.message = `Unesite rješenje kolone ${COL_RES}:`;
     }
     else if(info[12] == "english"){
-        settings.title = `Enter the answer of the column ${COL_RES}:`;
+        settings.title = "Answer of column"
+        settings.message = `Enter the answer of column ${COL_RES}:`;
     }
 
     switch(COL_RES){
@@ -43,6 +45,7 @@ function Daj_Rjesenje_Kolone(elem){
     }
 
     settings.type = "text";
+    settings.upper_lower = "upper";
     settings.on_OK = (info) => {
         switch(COL_RES){
             case 'A': LAST_ENTERED_VALUE_COL_A = info; break;
@@ -77,16 +80,19 @@ function Provjeri_Rjesenje_Kolone(rjesenje){
 }
 function Daj_Rjesenje_Asocijacije(){
     var info = JSON.parse(sessionStorage.getItem("info"));
-    var settings = {};
+    var settings = new DialogSettings("prompt");
 
     if(info[12] == "srpski"){
-        settings.title = `Unesite konačno rješenje:`;
+        settings.title = "Konačno rješenje"
+        settings.message = `Unesite konačno rješenje:`;
     }
     else if(info[12] == "english"){
-        settings.title = `Enter the final answer:`;
+        settings.title = "Final answer"
+        settings.message = `Enter the final answer:`;
     }
 
     settings.type = "text";
+    settings.upper_lower = "upper";
     settings.value = LAST_ENTERED_VALUE_COL_Final;
     settings.on_OK = (info) => {
         LAST_ENTERED_VALUE_COL_Final = info;
@@ -158,7 +164,7 @@ function Game_Lost(){
 }
 function Activate_End_Dialog(won_or_lost){
     var info = JSON.parse(sessionStorage.getItem("info"));
-    var settings = {};
+    var settings = new DialogSettings("confirm");
     END_DIALOG_PARAM = won_or_lost;
 
     if(won_or_lost == "game-won"){

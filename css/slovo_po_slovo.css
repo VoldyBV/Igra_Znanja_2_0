@@ -11,9 +11,9 @@
 .odgovor-container{
     display: flex;
     justify-content: space-between;
-    min-height: 10%;
+    height: 15%;
     width: 90%;
-    font-size: 5vh;
+    font-size: 7vh;
 }
 #odgovor {
     height: 100%;

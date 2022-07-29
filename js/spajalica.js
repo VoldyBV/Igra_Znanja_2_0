@@ -66,7 +66,7 @@ function Check(right) {
 }
 function End(){
     var points = document.querySelectorAll("button[pair=left].spajalica-tacno").length * 4;
-    var settings = {};
+    var settings = new DialogSettings("alert");
     var info = JSON.parse(sessionStorage.getItem("info"));
     
     if(info[12] == "srpski"){

@@ -73,13 +73,13 @@ function End() {
     var positive_points = document.querySelectorAll(".tacno").length * 4;
     var negative_points = document.querySelectorAll(".netacno").length * -2;
     var info = JSON.parse(sessionStorage.getItem("info"));
-    var settings = {};
+    var settings = new DialogSettings("alert");
 
     if(info[12] == "srpski"){
         settings.message = `
             Osvojeni pozitivni poeni: ${positive_points}<br>
             Osvojeni negativni poeni: ${negative_points}<br>
-            <hr style="height: 2px"><br>
+            <hr style="height: 2px">
             UKUPNO: ${positive_points+negative_points}
         `;
     }
@@ -87,7 +87,7 @@ function End() {
         settings.message = `
             Earned positive points: ${positive_points}<br>
             Earned negative points: ${negative_points}<br>
-            <hr style="height: 2px"><br>
+            <hr style="height: 2px">
             TOTAL: ${positive_points+negative_points}
         `;
     }

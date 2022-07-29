@@ -10,10 +10,12 @@ function Start() {
     console.log(FRAZA)
 }
 function Search_For_Letter(elem){
+    //disabling a button so that it can be only clicked once
     elem.disabled = true;
     elem.classList.toggle("disabled");
     elem.setAttribute("clicked", "true");
     
+    //checking if selected letter is in FRAZA
     if(FRAZA.search(elem.innerHTML) > -1){
         Play_Sound("#tacno");
         var hidden = document.querySelector("#fraza").innerHTML;
@@ -43,11 +45,16 @@ function Check_Answer() {
     }
 }
 function Game_Won(){
+    document.querySelector("#timer").pause();
     var info = JSON.parse(sessionStorage.getItem("info"));
-    var settings = {};
+    var settings = new DialogSettings("alert");
 
     var pts = 10;
-    var covered_l = document.querySelector("#fraza").innerHTML.toString().split('').filter((l) => { return l == '_'}).length;
+    var covered_l = document.querySelector("#fraza").innerHTML.toString().split('').filter(
+        (l) => { 
+            return l == '_'
+        }).length;
+
     var bonus = document.querySelectorAll(".buttons button[clicked=false]").length;
 
     if(info[12] == "srpski"){
@@ -57,7 +64,7 @@ function Game_Won(){
             Osvojeni poeni: ${pts}<br>
             Bonus na skrivena slova: ${covered_l}<br>
             Bonus na neiskorištena slova: ${bonus}<br>
-            <hr style="height: 2px" /><br>
+            <hr style="height: 2px" />
             UKUPNO: ${pts + bonus + covered_l}
         `;
     }
@@ -68,7 +75,7 @@ function Game_Won(){
             Earned points: ${pts}<br>
             Bonus points for covered letters: ${covered_l}<br>
             Bonus points for unused letters: ${bonus}<br>
-            <hr style="height: 2px"><br>
+            <hr style="height: 2px">
             TOTAL: ${pts + bonus + covered_l}
         `;
     }

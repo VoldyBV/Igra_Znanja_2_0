@@ -90,7 +90,7 @@ function End(sound){
 function Activate_End_Dialog(){
 
     var info = JSON.parse(sessionStorage.getItem("info"));
-    var settings = {};
+    var settings = new DialogSettings("confirm");
     var points = document.querySelectorAll("button[reveal=yes]").length;
     var bonus = +document.querySelector("#timer").value;
 
@@ -98,7 +98,7 @@ function Activate_End_Dialog(){
         settings.message = `
             Osvojeni poeni: ${points}<br>
             Bonus: ${bonus}<br>
-            <hr><br>
+            <hr>
             Ukupno: ${+bonus + +points}
         `;
         settings.btn_Cancel_Text = "Pogledaj igru";
@@ -107,7 +107,7 @@ function Activate_End_Dialog(){
         settings.message = `
             Earned points: ${points}<br>
             Bonus: ${bonus}<br>
-            <hr><br>
+            <hr>
             Total: ${+bonus + +points}
         `;
         settings.btn_Cancel_Text = "Spectate the game";

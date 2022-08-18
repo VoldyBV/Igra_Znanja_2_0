@@ -1,0 +1,21 @@
+.button-container {
+    height: 20%;
+    width: 90%;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    justify-items: stretch;
+}
+.button-container button {
+    flex: 1;
+    margin-left: 0.9vh;
+    margin-right: 0.9vh;
+    font-size: 5vw;
+}
+.selected{
+    background-color: rgb(255, 214, 31);
+    border-color: rgb(255, 214, 31);
+    animation: selecting 0.5s;
+}

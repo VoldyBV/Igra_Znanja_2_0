@@ -25,8 +25,8 @@ function Get_Pitanja(which){
             "Which ocean connects the east and the west?",
             "How many hearts does an octopus have?",
             "Kick the intruder out:",
-            "Koji je prirodni neprijatelj hobotnica?",
             "What is the natural enemy of the octopus?",
+            "What category does a dolphin belong to?",
             "What are corals?",
             "Kick the intruder out:"
         ];

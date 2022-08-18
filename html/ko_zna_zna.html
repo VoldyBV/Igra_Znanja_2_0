@@ -13,24 +13,26 @@
     <!-- Styles -->
     <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/ko_zna_zna.css">
     <title></title>
+    <script src="../js/ko_zna_zna.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             var info = JSON.parse(sessionStorage.getItem("info"));
             var href = "";
             if(info[12] == "srpski"){
-                href = "";
-                document.head.querySelector("title").innerHTML = "";
-                document.querySelector(".header .header-naslov").innerHTML = ""
+                href = "../src/serbian_data_library/ko_zna_zna.js";
+                document.head.querySelector("title").innerHTML = "IZ | Ko Zna Zna";
+                document.querySelector(".header .header-naslov").innerHTML = "Ko Zna Zna"
                 document.querySelector("#help #help-srpski").style.display = "block";
             }
             else if(info[12] == "english"){
-                href = ""
-                document.head.querySelector("title").innerHTML = "";
-                document.querySelector(".header .header-naslov").innerHTML = "";
+                href = "../src/english_data_library/who_knows.js"
+                document.head.querySelector("title").innerHTML = "GOK | Who Knows?";
+                document.querySelector(".header .header-naslov").innerHTML = "Who Knows?";
                 document.querySelector("#help #help-english").style.display = "block";
             }
-            Lang_Settings
+            Lang_Settings(href)
         })
     </script>
 </head>
@@ -50,7 +52,7 @@
     <div class="header">
         <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
         <span class="header-naslov"> Naslov </span>
-        <bv-timer id="timer" value="30" autostart></bv-timer>
+        <bv-timer id="timer" value="90" autostart onTimeOut="End()"></bv-timer>
     </div>
     <div id="menu" class="menu" onclick="Close_Menu()">
         <div class="menu-content">
@@ -64,6 +66,18 @@
         </div>
     </div>
     <div class="content">
+        <div id="pitanje">jehjherjeh</div>
+        <div class="button-container">
+            <button onclick="Check_Answer(this)">A</button>
+            <button onclick="Check_Answer(this)">B</button>
+        </div>
+        <div class="button-container">
+            <button onclick="Check_Answer(this)">C</button>
+            <button onclick="Check_Answer(this)">D</button>
+        </div>
+        <div class="button-container">
+            <button id="next" onclick="Check_Answer(this)"> </button>
+        </div>
     </div>
     <div id="skripte">
     </div>

@@ -1,0 +1,31 @@
+#pitanje {
+    height: 40%;
+    width: 80%;
+
+    box-sizing: border-box;
+    background-color: white;
+    border: solid 3px black;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 5vh;
+}
+.button-container {
+    height: 15%;
+    width: 80%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button-container button{
+    height: 100%;
+    width: 49%;
+    font-size: 4vh;
+}
+#next {
+    width: 100%;
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Application parts -->
+    <script src="https://combinatronics.com/VoldyBV/bv-dialog/master/bv_dialog.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/modal-box/master/modal-box.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/timer_element/master/bv-timer.js"></script>
+    <script src="https://combinatronics.com/VoldyBV/popup_element/master/bv-popup.js"></script>
+    <script src="../js/basic_functions.js"></script>
+    <!-- Styles -->
+    <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sef.css">
+    <title></title>
+    <script src="../js/sef.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            var info = JSON.parse(sessionStorage.getItem("info"));
+            var href = "";
+            if(info[12] == "srpski"){
+                href = "";
+                document.head.querySelector("title").innerHTML = "IZ | Sef";
+                document.querySelector(".header .header-naslov").innerHTML = "Sef"
+                document.querySelector("#help #help-srpski").style.display = "block";
+            }
+            else if(info[12] == "english"){
+                href = ""
+                document.head.querySelector("title").innerHTML = "GOK | The Safe";
+                document.querySelector(".header .header-naslov").innerHTML = "The Safe";
+                document.querySelector("#help #help-english").style.display = "block";
+            }
+        })
+    </script>
+</head>
+<body>
+    <audio id="netacno" src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC">
+        <source src="https://audio.jukehost.co.uk/FGhBxegEdM0NqjqSalPRQ8lbt91ujQcC" type="audio/mp3">
+    </audio>
+    <audio id="tacno" src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU">
+        <source src="https://audio.jukehost.co.uk/5ir9o3vMRpzP0p5tbHx4YGMbPudJ5NZU" type="audio/mp3">
+    </audio>
+    <audio id="game-won" src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw">
+        <source src="https://audio.jukehost.co.uk/F3GLbVwgC8rER12NiOpb7PaYV0W8JHRw" type="audio/mp3">
+    </audio>
+    <audio id="game-lost" src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW">
+        <source src="https://audio.jukehost.co.uk/Y2QfIpEAU8ku7sVcjLoCBVmtvfjqapaW" type="audio/wav">
+    </audio>
+    <div class="header">
+        <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
+        <span class="header-naslov"> Naslov </span>
+        <bv-timer id="timer" value="90" autostart onTimeOut="Game_Lost()"></bv-timer>
+    </div>
+    <div id="menu" class="menu" onclick="Close_Menu()">
+        <div class="menu-content">
+            <button onmousedown="Open_Help()"> Pomoć </button>
+            <button onmousedown="Open_Info()"> Informacije </button>
+            <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
+            <button onclick="Quit_The_Game(event, undefined)"> Odustani od igre </button>
+        </div>
+        <div class="txt">
+            PAUZIRANO
+        </div>
+    </div>
+    <div class="content">
+        <div class="sef-container">
+            <div class="part1">
+                <button class="sef-button" onclick="Remove_Number(this)"></button>
+                <button class="sef-button" onclick="Remove_Number(this)"></button>
+                <button class="sef-button" onclick="Remove_Number(this)"></button>
+                <button class="sef-button" onclick="Remove_Number(this)"></button>
+            </div>
+            <div class="part2">
+                <button class="accept-btn sef-submit" onclick="Submit_Code()"> &#10003;</button>
+            </div>
+        </div>
+        <div class="sef-container">
+            <div class="part1">
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+            </div>
+            <div class="part2">
+                <button class="accept-btn sef-submit disabled" onclick="Submit_Code()" disabled> &#10003;</button>
+            </div>
+        </div>
+        <div class="sef-container">
+            <div class="part1">
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+            </div>
+            <div class="part2">
+                <button class="accept-btn sef-submit disabled" onclick="Submit_Code()" disabled> &#10003;</button>
+            </div>
+        </div>
+        <div class="sef-container">
+            <div class="part1">
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+            </div>
+            <div class="part2">
+                <button class="accept-btn sef-submit disabled" onclick="Submit_Code()" disabled> &#10003;</button>
+            </div>
+        </div>
+        <div class="sef-container">
+            <div class="part1">
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+            </div>
+            <div class="part2">
+                <button class="accept-btn sef-submit disabled" onclick="Submit_Code()" disabled> &#10003;</button>
+            </div>
+        </div>
+        <div class="sef-container">
+            <div class="part1">
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+                <button class="sef-button disabled" onclick="Remove_Number(this)" disabled></button>
+            </div>
+            <div class="part2"> 
+                <button class="accept-btn sef-submit disabled" onclick="Submit_Code()" disabled> &#10003;</button>
+            </div>
+        </div>
+        <div class="sef-container" id="numbers">
+            <div class="part1">
+                <button class="number sef-button" onclick="Choose_Number(this)">0</button>
+                <button class="number sef-button" onclick="Choose_Number(this)">1</button>
+                <button class="number sef-button" onclick="Choose_Number(this)">2</button>
+            </div>
+            <div class="part2">
+                <button class="number sef-button" onclick="Choose_Number(this)">3</button>
+                <button class="number sef-button" onclick="Choose_Number(this)">4</button>
+                <button class="number sef-button" onclick="Choose_Number(this)">5</button>
+            </div>
+        </div>
+    </div>
+    <div id="skripte">
+    </div>
+    
+    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="help-srpski" style="display: none;">
+            <h2><u>Opis</u></h2>
+            <i>Sef</i> je logička igra. Cilj igre je otkriti kombinaciju sefa u što manje poteza.
+            <br>
+            <br>
+            <h2>Kako se igra?</h2>
+            Kombinacija se sastoji od brojeva 0, 1, 2, 3, 4 i 5. Kada napišete kombinaciju kliknite
+            zeleno dugme (&#10003;) da potvrdite kombinaciju. Nakon toga igra će provjeriti vašu
+            kombinaciju i dati vam indikatore. <br>
+            Postoje 3 vrste indikatora:
+            <ul>
+                <li>Crveni indikator - tačan broj na pravom mjestu </li>
+                <li>Žuti indikator - tačan broj na pogređnom mjestu</li>
+                <li>Sivi indikator - netačan broj </li>
+            </ul>
+            <b>REDOSLIJED INDIKATORA NIJE ISTI KAO REDOSLIJED BROJEVA U KOMBINACIJI </b>
+
+            <br>
+            <br>
+            <h2>Računanje poena</h2>
+            Ukoliko ste pogodili kombinaciju dobijate 15 poena. <br>
+            <ul>
+                <li>Ukoliko ste kombinaciju pogodili na 1. koraku, dobijate 25 bonus poena.</li>
+                <li>Ukoliko ste kombinaciju pogodili na 2. koraku, dobijate 20 bonus poena.</li>
+                <li>Ukoliko ste kombinaciju pogodili na 3. koraku, dobijate 15 bonus poena.</li>
+                <li>Ukoliko ste kombinaciju pogodili na 4. koraku, dobijate 10 bonus poena.</li>
+                <li>Ukoliko ste kombinaciju pogodili na 5. koraku, dobijate 5 bonus poena.</li>
+                <li>Ukoliko ste kombinaciju pogodili na 6. koraku, dobijate 0 bonus poena.</li>
+            </ul>
+        </div>
+        <div id="help-english" style="display: none;">
+            <h2><u>Description</u></h2>
+            <i>The Safe</i> is a logic game. The goal of the game is to find a code of the 
+            safe in as few moves as possible.
+            <br>
+            <br>
+            <h2>How to play?</h2>
+            The code consists of the numbers 0, 1, 2, 3, 4 and 5. 
+            Once you have written the code, click the green button (&#10003;) to submit the code. 
+            After that the game will check your code and give you indicators.
+            <br>
+            There are 3 types of indicators:
+            <ul>
+                <li>Red indicator - the right number in the right place</li>
+                <li>Yellow indicator - right number in the wrong place</li>
+                <li>Gray indicator - wrong number</li>
+            </ul>
+
+            <b>THE ORDER OF THE INDICATORS IS NOT THE SAME AS THE ORDER OF THE NUMBERS IN THE CODE </b>
+            <br>
+            <br>
+            <h2>Points</h2>
+            If you guessed the code, you get 15 points. <br>
+            <ul>
+                <li>If you guessed the code on the 1st move, you get 25 bonus points.</li>
+                <li>If you guessed the code on the 2nd move, you get 20 bonus points.</li>
+                <li>If you guessed the code on the 3rd move, you get 15 bonus points.</li>
+                <li>If you guessed the code on the 4th move, you get 10 bonus points.</li>
+                <li>If you guessed the code on the 5th move, you get 5 bonus points.</li>
+                <li>If you guessed the code on the 6th move, you get 0 bonus points.</li>
+            </ul>
+        </div>
+    </bv-modal>
+    <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+        <div id="info-srpski" style="font-size: 5vh;">
+            <ul>
+                <li>Igricu osmislio: Borislav Vučićević</li>
+                <li>Igricu dizajnirao: Borislav Vučićević</li>
+                <li>Igricu programirao: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">Pogledaj profil</a></li>
+            </ul>
+        </div>        
+        <div id="info-english" style="font-size: 5vh; display: none;">
+            <ul>
+                <li>Game is made by: Borislav Vučićević</li>
+                <li>Game's design: Borislav Vučićević</li>
+                <li>Game is coded: Borislav Vučićević</li>
+                <li>GitHub: <a href="https://github.com/VoldyBV" target="_blank">See profile</a></li>
+            </ul>
+        </div>
+    </bv-modal>
+</body>
+</html>

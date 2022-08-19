@@ -82,26 +82,36 @@
     <div id="skripte">
     </div>
     
-    <bv-modal title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
+    <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
         <div id="help-srpski" style="display: none;">
             <h2><u>Opis</u></h2>
-            <i>Ime igre</i>
+            <i>Ko zna zna</i> je igra opšteg znanja. Cilj igre je dati što veći bro tačnih odgovora.
             <br>
             <br>
             <h2>Kako se igra?</h2>
+            Igra vam daje 10 pitanja i za svako pitanje po 4 odgovora. Jedan od odgovora je tačan. Ukoliko ne 
+            znate odgovor na pitanje kliknite dugme "Ne znam".
             <br>
             <br>
             <h2>Računanje poena</h2>
+            Za svaki tačan odgovor dobijate 5 poena. <br>
+            Za svaki netačan odgovor gubite 2 poena.
         </div>
         <div id="help-english" style="display: none;">
             <h2><u>Description</u></h2>
-            <i>Game name</i>
+            <i>Who knows?</i> is a common knowledge game. 
+            The goal of the game is to give as many correct answers as possible.
             <br>
             <br>
             <h2>How to play?</h2>
+            Game asks you 10 questions and for each question game offers you 4 answers. 
+            One of the answers is correct. 
+            If you do not know the answer to the question, click the "I don't know" button.
             <br>
             <br>
             <h2>Points</h2>
+            For each correct answer you get 5 points. <br>
+            For each wrong answer you lose 2 points.
         </div>
     </bv-modal>
     <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">

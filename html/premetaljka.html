@@ -27,7 +27,7 @@
                 document.querySelector("#help #help-srpski").style.display = "block";
             }
             else if(info[12] == "english"){
-                href = "../src/english_data_library/whirlword.js"
+                href = "../src/english_data_library/the_swapper.js"
                 document.head.querySelector("title").innerHTML = "GOK | The Swapper";
                 document.querySelector(".header .header-naslov").innerHTML = "The Swapper";
                 document.querySelector("#help #help-english").style.display = "block";
@@ -70,6 +70,7 @@
         <div class="button-container" row="2"></div>
         <div class="button-container" row="3"></div>
         <div class="button-container">
+            <button id="clue-button" class="accept-btn" onclick="Show_Clues()"> &#10003;</button>
             <button id="submit-button" class="accept-btn" onclick="Submit()"> &#10003;</button>
         </div>
     </div>

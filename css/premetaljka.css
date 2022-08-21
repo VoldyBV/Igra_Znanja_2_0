@@ -19,3 +19,36 @@
     border-color: rgb(255, 214, 31);
     animation: selecting 0.5s;
 }
+.sklopljena-rijec {
+    background-color: rgb(39, 255, 31);
+    border-color: rgb(39, 255, 31);
+    animation: 0.5s sklopljena-rijec-anim;
+}
+@keyframes selecting {
+    from {
+        background-color: #069;
+        border-color: #069;
+    }
+    to {
+        background-color: rgb(255, 214, 31);
+        border-color: rgb(255, 214, 31);
+    }
+}
+@keyframes sklopljena-rijec-anim {
+    from {
+        background-color: #069;
+        border-color: #069;
+    }
+    to {
+        background-color: rgb(39, 255, 31);
+        border-color: rgb(39, 255, 31);
+    }
+}
+#submit-button {
+    margin-right: 0.5%;
+}
+#clue-button {
+    margin-left: 0.5%;
+    background-color: #B73239;
+    border-color: #B73239;
+}

@@ -1,7 +1,8 @@
 var WORD_1, WORD_2, WORD_3;
-
+var GAME;
 function Start() {
-    var words = Get_Words();
+    GAME = Get_Words();
+    var words = GAME.words;
     var row_1 = document.querySelector("[row='1']");
     var row_2 = document.querySelector("[row='2']");
     var row_3 = document.querySelector("[row='3']");
@@ -38,56 +39,23 @@ function Start() {
         row_3.append(btn);
     }
 }
+function Show_Clues() {
+    var clues = GAME.clues;
+    var lang = JSON.parse(sessionStorage.getItem("info"))[12];
+    var settings = new DialogSettings("alert");
 
-function Check_Words() {
-    var word_1 = "", word_2 = "", word_3 = "";
-    var row1_btns = document.querySelectorAll("[row='1'] button");
-    var row2_btns = document.querySelectorAll("[row='2'] button");
-    var row3_btns = document.querySelectorAll("[row='3'] button");
+    if(lang == "srpski") settings.title = "Opis riječi";
+    else if(lang == "english") settings.title = "Hints";
 
-    //mark all words as correct
-    row1_btns.forEach((item) => {
-        item.classList.add("accept-btn");
-        item.classList.add("disabled");
-        item.disabled = true;
-        word_1 += item.innerHTML;
-    });
-    row2_btns.forEach((item) => {
-        item.classList.add("accept-btn");
-        item.classList.add("disabled");
-        item.disabled = true;
-        word_2 += item.innerHTML;
-    });
-    row3_btns.forEach((item) => {
-        item.classList.add("accept-btn");
-        item.classList.add("disabled");
-        item.disabled = true;
-        word_3 += item.innerHTML;
-    });
-    //exclude incorrect words
-    if(word_1 != WORD_1) {
-        row1_btns.forEach((item) => {
-            item.classList.remove("accept-btn");
-            item.classList.remove("disabled");
-            item.disabled = false;
-        });
-    }
-    if(word_2 != WORD_2) {
-        row2_btns.forEach((item) => {
-            item.classList.remove("accept-btn");
-            item.classList.remove("disabled");
-            item.disabled = false;
-        });
-    }
-    if(word_3 != WORD_3) {
-        row3_btns.forEach((item) => {
-            item.classList.remove("accept-btn");
-            item.classList.remove("disabled");
-            item.disabled = false;
-        });
-    }
+    settings.message = "<ol>";
+
+    clues.forEach((item) => {
+        settings.message += `<li> ${item} </li>`;
+    })
+
+    settings.message += "</ol>";
+    BV_dialog.alert(settings);    
 }
-
 function Switch_Letters(elem){
     elem.classList.toggle("selected");
     var selected_letters = document.querySelectorAll("button.selected");
@@ -106,7 +74,60 @@ function Switch_Letters(elem){
         Check_Words();
     }
 }
+function Check_Words() {
+    var word_1 = "", word_2 = "", word_3 = "";
+    var row1_btns = document.querySelectorAll("[row='1'] button");
+    var row2_btns = document.querySelectorAll("[row='2'] button");
+    var row3_btns = document.querySelectorAll("[row='3'] button");
 
+    //mark all words as correct
+    row1_btns.forEach((item) => {
+        if(!item.classList.contains("sklopljena-rijec")){
+            item.classList.add("sklopljena-rijec");
+            item.classList.add("disabled");
+            item.disabled = true;
+            word_1 += item.innerHTML;
+        }
+    });
+    row2_btns.forEach((item) => {
+        if(!item.classList.contains("sklopljena-rijec")){
+            item.classList.add("sklopljena-rijec");
+            item.classList.add("disabled");
+            item.disabled = true;
+            word_2 += item.innerHTML;
+        }
+    });
+    row3_btns.forEach((item) => {
+        if(!item.classList.contains("sklopljena-rijec")){
+            item.classList.add("sklopljena-rijec");
+            item.classList.add("disabled");
+            item.disabled = true;
+            word_3 += item.innerHTML;
+        }
+    });
+    //exclude incorrect words
+    if(word_1 != WORD_1 && word_1 != "") {
+        row1_btns.forEach((item) => {
+            item.classList.remove("sklopljena-rijec");
+            item.classList.remove("disabled");
+            item.disabled = false;
+        });
+    }
+    if(word_2 != WORD_2 && word_2 != "") {
+        row2_btns.forEach((item) => {
+            item.classList.remove("sklopljena-rijec");
+            item.classList.remove("disabled");
+            item.disabled = false;
+        });
+    }
+    if(word_3 != WORD_3 && word_3 != "") {
+        row3_btns.forEach((item) => {
+            item.classList.remove("sklopljena-rijec");
+            item.classList.remove("disabled");
+            item.disabled = false;
+        });
+    }
+}
 function Submit() {
     var word_1 = "", word_2 = "", word_3 = "";
     var row1_btns = document.querySelectorAll("[row='1'] button");

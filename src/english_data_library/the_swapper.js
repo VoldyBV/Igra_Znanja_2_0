@@ -24,21 +24,21 @@ function Get_Words() {
 }
 function Words () {
     return [
-        "PREPELICA",
-        "ISPRŽITI",
-        "ZAPLIJENITI"
+        "MISTREAT",
+        "DESTROY",
+        "CONFISCATE"
     ];
 };
 function Clues() {
     return [
-        "Vrsta ptice",
-        "Ispeći - sinonim",
-        "Konfiskovati - sinonim"
+        "Abuse - synonym",
+        "tear down - synonym",
+        "Starts with con"
     ]
 }
 (
     () => {
-        document.querySelector("#clue-button").innerHTML = "Opis riječi";
+        document.querySelector("#clue-button").innerHTML = "Clues";
         Start();
     }
 )();

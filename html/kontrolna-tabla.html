@@ -74,7 +74,7 @@
             <div class="row">
                 <input readonly type="text" dif="pts" class="polje">
                 <button dif="btn" onclick="window.location.href = 'sef.html'"></button>
-                <button dif="btn"></button>
+                <button dif="btn" onclick="window.location.href='niz_za_nizom.html'"></button>
                 <input readonly type="text" dif="pts" class="polje">
             </div>
             <div class="row">
@@ -85,8 +85,8 @@
     <div id="skripte">
         <script>
             var info = JSON.parse(sessionStorage.getItem("info"));
-            var imena_igara = ["Slovo po Slovo", "Moj Broj", "Desno-Lijevo", "Zid", "Asocijacije", "Spajalica", "Parovi", "Put Oko Svijeta", "Premetaljka", "Ko Zna Zna", "Sef", "Moji Izrazi"]
-            var game_names = ["Letter by Letter", "My Number", "Left Or Right", "The Wall", "Associations", "The Stapler", "Pairs", "World of Flags", "The Swapper", "Who knows?", "The Safe", "My Expressions"]
+            var imena_igara = ["Slovo po Slovo", "Moj Broj", "Desno-Lijevo", "Zid", "Asocijacije", "Spajalica", "Parovi", "Put Oko Svijeta", "Premetaljka", "Ko Zna Zna", "Sef", "Niz Za Nizom"]
+            var game_names = ["Letter by Letter", "My Number", "Left Or Right", "The Wall", "Associations", "The Stapler", "Pairs", "World of Flags", "The Swapper", "Who knows?", "The Safe", "The Sequences"]
             var pts = document.querySelectorAll(".polje[dif=pts]");
             var btns = document.querySelectorAll("button[dif=btn]");
             var pts_sum = document.querySelector("#ukupno");

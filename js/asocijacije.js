@@ -1,3 +1,4 @@
+var NOPG;//NUMBER OF POSSIBLE GAMES
 var GAME;
 var COL_RES;
 var LAST_ENTERED_VALUE_COL_A = "";
@@ -11,7 +12,7 @@ var final_pts = 0;
 var END_DIALOG_PARAM = "";
 
 function Start() {
-    GAME = Get_A_Game(Get_Random_Number(2));
+    GAME = Get_A_Game(Get_Random_Number(NOPG));
 }
 function Open_Field(elem){
     var col = elem.getAttribute("tbl-index").split('-')[0];

@@ -1,7 +1,8 @@
+var NOPG = 10;//NUMBER OF POSSIBLE GAMES
 var GAME;
 
 function Start(){
-    GAME = Get_A_Game(Get_Random_Number(1));
+    GAME = Get_A_Game(Get_Random_Number(NOPG));
 
     var left = Mix_Up_Array(GAME.pairs.map((item) => {return item.split('-')[0]}));
     var right = Mix_Up_Array(GAME.pairs.map((item) => {return item.split('-')[1]}));

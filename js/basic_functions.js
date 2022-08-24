@@ -1,17 +1,3 @@
-function Go_FullScreen(lang) {
-    var settings = {};
-    if(lang == "srpski"){
-        settings.title = "Cijeli ekran";
-        settings.message = "Kliknite OK kako biste prešli u režim cijelog ekrana.";
-    }
-    else if(lang == "english"){
-        settings.title = "FullScreen";
-        settings.message = "Click OK to open game in fullscreen mode.";
-    }
-
-    settings.on_OK = () => { window.top.document.body.requestFullscreen(); };
-    BV_dialog.alert(settings);
-}
 function Open_Menu(){
     document.getElementById("menu").style.display = "flex";
     document.getElementById("timer").pause();

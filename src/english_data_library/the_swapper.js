@@ -32,7 +32,7 @@ function Words () {
 function Clues() {
     return [
         "Abuse - synonym",
-        "tear down - synonym",
+        "Tear down - synonym",
         "Starts with con"
     ]
 }

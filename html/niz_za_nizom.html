@@ -13,26 +13,26 @@
     <!-- Styles -->
     <link rel="icon" type="image/png" href="../src/imgs/icon.png" />
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/premetaljka.css">
+    <link rel="stylesheet" href="../css/niz_za_nizom.css">
     <title></title>
-    <script src="../js/premetaljka.js"></script>
+    <script src="../js/niz_za_nizom.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             var info = JSON.parse(sessionStorage.getItem("info"));
             var href = "";
             if(info[12] == "srpski"){
-                href = "../src/serbian_data_library/premetaljka.js";
-                document.head.querySelector("title").innerHTML = "IZ | Premetaljka";
-                document.querySelector(".header .header-naslov").innerHTML = "Premetaljka"
+                href = "";
+                document.head.querySelector("title").innerHTML = "IZ | Niz Za Nizom";
+                document.querySelector(".header .header-naslov").innerHTML = "Niz Za Nizom"
                 document.querySelector("#help #help-srpski").style.display = "block";
             }
             else if(info[12] == "english"){
-                href = "../src/english_data_library/the_swapper.js"
-                document.head.querySelector("title").innerHTML = "GOK | The Swapper";
-                document.querySelector(".header .header-naslov").innerHTML = "The Swapper";
+                href = ""
+                document.head.querySelector("title").innerHTML = "GOK | The Sequences";
+                document.querySelector(".header .header-naslov").innerHTML = "The Sequences";
                 document.querySelector("#help #help-english").style.display = "block";
             }
-            Lang_Settings(href)
+            Lang_Settings
         })
     </script>
 </head>
@@ -52,26 +52,48 @@
     <div class="header">
         <button id="open-menu" onclick="Open_Menu()"> &#8801; </button>
         <span class="header-naslov"> Naslov </span>
-        <bv-timer id="timer" value="300" autostart onTimeOut="Submit()"></bv-timer>
+        <bv-timer id="timer" value="30" autostart onInterval="Timer_On_Interval()" onTimeOut="Timer_On_Time_Out()"></bv-timer>
     </div>
     <div id="menu" class="menu" onclick="Close_Menu()">
         <div class="menu-content">
             <button onmousedown="Open_Help()"> Pomoć </button>
             <button onmousedown="Open_Info()"> Informacije </button>
             <button onmousedown="Turn_Sounds_On_Of()"> Iskljuci / Ukljuci zvuk </button>
-            <button onclick="Quit_The_Game(event, 8)"> Odustani od igre </button>
+            <button onclick="Quit_The_Game(event, 11)"> Odustani od igre </button>
         </div>
         <div class="txt">
             PAUZIRANO
         </div>
     </div>
     <div class="content">
-        <div class="button-container" row="1"></div>
-        <div class="button-container" row="2"></div>
-        <div class="button-container" row="3"></div>
-        <div class="button-container">
-            <button id="clue-button" class="accept-btn" onclick="Show_Clues()"> &#10003;</button>
-            <button id="submit-button" class="accept-btn" onclick="Submit()"> &#10003;</button>
+        <div class="btn-container">
+            <button onclick="Remove_Picture(this)" picture="" picture-index=""></button>
+            <button onclick="Remove_Picture(this)" picture="" picture-index=""></button>
+            <button onclick="Remove_Picture(this)" picture="" picture-index=""></button>
+            <button onclick="Remove_Picture(this)" picture="" picture-index=""></button>
+            <button onclick="Remove_Picture(this)" picture="" picture-index=""></button>
+            <button onclick="Remove_Picture(this)" picture="" picture-index=""></button>
+        </div>
+        <hr class="dividing-line">
+        <div class="btn-container">
+            <button onclick="Place_Picture(this)" picture="blob" picture-index="0" class="control-btn blob"></button>
+            <button onclick="Place_Picture(this)" picture="bulb" picture-index="1" class="control-btn bulb"></button>
+            <button onclick="Place_Picture(this)" picture="checkmark" picture-index="2" class="control-btn checkmark"></button>
+            <button onclick="Place_Picture(this)" picture="clover" picture-index="3" class="control-btn clover"></button>
+            <button onclick="Place_Picture(this)" picture="exlamation_mark" picture-index="4" class="control-btn exlamation_mark"></button>
+            <button onclick="Place_Picture(this)" picture="heart" class="control-btn heart" picture-index="5"></button>
+        </div>
+        <div class="btn-container">
+            <button onclick="Place_Picture(this)" picture="leaf" picture-index="6" class="control-btn leaf"></button>
+            <button onclick="Place_Picture(this)" picture="lightning" picture-index="7" class="control-btn lightning"></button>
+            <button onclick="Place_Picture(this)" picture="question_mark" picture-index="8" class="control-btn question_mark"></button>
+            <button onclick="Place_Picture(this)" picture="romb" picture-index="9" class="control-btn romb"></button>
+            <button onclick="Place_Picture(this)" picture="royal" picture-index="10" class="control-btn royal"></button>
+            <button onclick="Place_Picture(this)" picture="star" picture-index="11" class="control-btn star"></button>
+        </div>
+        <hr class="dividing-line">
+        <div class="btn-container">
+            <button id="submit" class="accept-btn" onclick="Provjeri_Sekvencu()">&#10003;</button>
         </div>
     </div>
     <div id="skripte">
@@ -80,33 +102,34 @@
     <bv-modal opened title="Pomoć" id="help" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
         <div id="help-srpski" style="display: none;">
             <h2><u>Opis</u></h2>
-            <i>Premetaljka</i> je igra riječima. Cilj igre je da mijenjate mjesta slovima da 
-            biste pronašli zadate riječi.
+            <i>Niz Za Nizom</i> je igra sa sličicama. Cilj igre jeste da zapamtite što više nizova sličica.
+            Igra vam zada 6 nizova sličica. Za rješavanje svakog niza imate 20 sekundi.
             <br>
             <br>
             <h2>Kako se igra?</h2>
-            Na početku igre se zadaju 3 riječi. Potom se izmješaju slova riječi. Slovima mijenjate mjesta
-            klikom na njih.
+            Prvo vam igra zada niz koji će biti vidljiv narednih 10 sekundi. U preostalih 10 sekundi
+            napravite isti niz od datih sličica. Nakon toga proces se ponavlja
             <br>
             <br>
             <h2>Računanje poena</h2>
-            Za svaku pronađenu riječi dobijate 5 poena. <br>
-            Za svako slovo svake pronađene riječi dobijate bonus poen.
+            Za svaki tačno napravljen niz dobijate 5 poena.
         </div>
         <div id="help-english" style="display: none;">
             <h2><u>Description</u></h2>
-            <i>The Swapper</i> is a word game. The goal of the game is to switch places of letters 
-            to find the given words.
+            <i>The Sequences</i> is a game with pictures. The goal of the game is to remember as many 
+            sequences of pictures as possible. The game gives you 6 sequences. 
+            You have 20 seconds to solve each sequence.
             <br>
             <br>
             <h2>How to play?</h2>
-            At the beginning of the game, 3 words are assigned. Then the letters of the words are mixed up. 
-            You sawp places of letters by clicking on them.
+            Firstly, the game gives you a sequence that will be visible for the next 10 seconds. 
+            In the remaining 10 seconds, make the same sequence from the given pictures.
+            After that process repeats.
             <br>
             <br>
             <h2>Points</h2>
-            For each found word you get 5 points. <br>
-            For each letter of each word you find, you get a bonus point.
+            For each correctly made sequence you get 5 points.
+            For 
         </div>
     </bv-modal>
     <bv-modal title="Informacije" id="info" onopen="document.getElementById('timer').pause()" onclose="document.getElementById('timer').play()">
